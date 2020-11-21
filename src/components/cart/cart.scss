@@ -1,0 +1,36 @@
+.cart-item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+    margin-left: 20px;
+    height: 25px;
+    cursor: pointer;
+    user-select: none;
+    
+    .cart-logo{
+        height: 100%;
+        width: 100%;
+        left: 0;
+        position: absolute;
+        font-size: 25px;
+    }
+
+    .cart-count-container{
+        position: absolute;
+        left: 0;
+        top: -3.1px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cart-count{
+        color: #fff;
+        font-size: 10px;
+    }
+}
