@@ -6,7 +6,6 @@ import '../menu-items/menu-items.scss';
 
 
 function MenuItem({title,imageUrl,size,history,match,linkUrl }){
-    console.log(linkUrl)
     return (
     <div className= {`${size?size:''} menu-item`} onClick = {() => history.push(`${match.url}${linkUrl}`)}>
         <div style = {{

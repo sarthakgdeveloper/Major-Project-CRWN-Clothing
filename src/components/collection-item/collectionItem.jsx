@@ -2,8 +2,7 @@ import React from 'react';
 import './collectionItem.scss';
 import {connect} from 'react-redux';
 import {addItem} from '../../redux/cart/cart.action'
-
-import CustomButton from '../custom-button/button'
+import {CollectionFooterContainer, CollectionItemContainer, CustomButtonContainer, ImageContainer} from './collectionItem.style'
 
 const CollectionItem = ({item,  addItem}) => {
 
@@ -11,14 +10,14 @@ const CollectionItem = ({item,  addItem}) => {
 
 
     return (
-        <div className="collectionItem">
-        <div className='image' style = {{backgroundImage: `url(${imageUrl})`}} ></div>
-        <div className="collection-footer">
-            <span className="name">{name}</span>
-            <span className="price">${price}</span>
-        </div>
-        <CustomButton onClick={() => addItem(item)}>Add To Cart</CustomButton>
-       </div>
+        <CollectionItemContainer>
+                <ImageContainer style = {{backgroundImage: `url(${imageUrl})`}} ></ImageContainer>
+                <CollectionFooterContainer>
+                    <span>{name}</span>
+                    <span>${price}</span>
+                </CollectionFooterContainer>
+                <CustomButtonContainer onClick={() => addItem(item)}>Add To Cart</CustomButtonContainer>
+        </CollectionItemContainer>
     )
 }
 
