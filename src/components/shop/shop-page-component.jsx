@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../shop/shop-page.scss';
 import {Route} from 'react-router-dom'
 import CollectionOverview from '../collection-overview/collection-overview';
@@ -9,25 +9,18 @@ import {selectIsfetching} from '../../redux/shop/shop.selector'
 import {connect} from 'react-redux';
 import Loader from '../loader/loader'
 
-class ShopPage extends React.Component{
+const ShopPage = ({match,isFetching,setShopData}) => {
 
-    unsubscribeFromSnapshot = null;
-
-    componentDidMount() {
-        const {setShopData} = this.props;
+    useEffect(() => {
         setShopData();
-    }
-    
-    
-    render() {
-        const {match,isFetching} = this.props;
-        return isFetching ? <Loader/>: (
-            <div className = 'shop-page'>
-             < Route exact path={`${match.path}`}  component={CollectionOverview} />
-             < Route  path={`${match.path}/:collectionId`}  component={CollectionPage} />
-            </div>
-        )
-    }
+    }, [setShopData])
+
+    return isFetching ? <Loader/>: (
+        <div className = 'shop-page'>
+            < Route exact path={`${match.path}`}  component={CollectionOverview} />
+            < Route  path={`${match.path}/:collectionId`}  component={CollectionPage} />
+        </div>
+    )
 
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {HomePage} from './components/homepage/homepage.component';
 import ShopPage from './components/shop/shop-page-component';
 import SignUpAndSignIn from './components/sign-in-and-sign-up/sign-in-and-sign-up';
@@ -12,31 +12,24 @@ import CheckOut from './components/checkout/checkout'
 import './App.css';
 
 
-class App extends React.Component {
-
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const {checkUserSession} = this.props;
+const App = ({checkUserSession, currentUser}) => {
+  useEffect(() => {
     checkUserSession();
-  }
+  }, [checkUserSession])
   
-  
-  render(){
-    return (
-      <div>
-        <Header/>
-        <Switch>
-          <Route exact path='/' component = {HomePage} />
-          <Route path='/shop' component = {ShopPage} />
-          <Route path='/checkout' component = {CheckOut} />
-          <Route path='/signin' render = {() => 
-            this.props.currentUser ? < Redirect to='/'/> : <SignUpAndSignIn/>
-          } />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header/>
+      <Switch>
+        <Route exact path='/' component = {HomePage} />
+        <Route path='/shop' component = {ShopPage} />
+        <Route path='/checkout' component = {CheckOut} />
+        <Route path='/signin' render = {() => 
+          currentUser ? < Redirect to='/'/> : <SignUpAndSignIn/>
+        } />
+      </Switch>
+    </div>
+  );
 }
 
 
