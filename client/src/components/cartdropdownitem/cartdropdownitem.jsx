@@ -1,14 +1,18 @@
 import React from 'react';
 import './cartdropdownitem.scss';
+import QuantityHandler from '../quantity-handler/quantity-handler';
 
-const CartDropDownItem = ({item: {imageUrl, name, quantity, price}}) => (
+const CartDropDownItem = ({item}) => {
+    const {imageUrl, name, quantity, price} = item;
+    return (
     <div className='cart-dropdown-item'>
         <img src={imageUrl} alt="item"/>
         <div className='item-details'>
             <span className='name'>{name}</span>
             <span className='price'>{quantity} X ${price}</span>
         </div>
+        <QuantityHandler cartItem={item}/>
     </div>
-)
+)};
 
 export default CartDropDownItem;
