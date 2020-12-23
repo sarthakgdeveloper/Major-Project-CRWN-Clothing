@@ -1,0 +1,87 @@
+.navbar{
+    position: relative;
+    top: 2vw;
+    height: 5vw;
+    transition: all .4s ease;
+}
+.drop-down-navbar{
+    height: 30vw;
+    transition: all .4s ease;
+}
+
+.logo{
+    position: absolute;
+    top: 0;
+}
+
+
+
+
+
+
+
+.navbar-items{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-50vw);   
+    transition: all .4s ease;
+    
+    div{
+        padding: 1vw;
+        
+        .links,span{
+            text-decoration: none;
+            list-style: none;
+            font-size: 12px;
+        }
+    }
+}
+.drop-down{
+    transition: all .4s ease;
+    transform: translateY(0vw);
+}
+
+.hamburger-logo{
+    height: 2px;
+    width: 4vw;
+    background-color: rgb(90, 90, 90);
+    position: absolute;
+    right: 0.5vw;
+    top: 1vw;
+    border-radius: 10px;
+    user-select: none;
+    transition: all .4s ease;
+}
+
+.hamburger-logo::before,.hamburger-logo::after{
+    content: '';
+    height: inherit;
+    width: inherit;
+    background-color: rgb(86, 86, 86);
+    position: absolute;
+    top: -5px;
+    transition: all .4s ease;
+}
+.hamburger-logo::after{
+    top: 5px;
+}
+
+.clicked-hamburger-logo{
+    background-color: transparent;
+    transition: all .4s ease;
+    transform: translateX(-10px);
+}
+
+.clicked-hamburger-logo::before,.clicked-hamburger-logo::after{
+    transition: all .4s ease;
+}
+
+.clicked-hamburger-logo::before{
+    transform: translate(9px, 9.5px) rotate(45deg);
+}
+.clicked-hamburger-logo::after{
+    transform: translate(9px, -1px) rotate(-45deg);
+}

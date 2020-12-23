@@ -16,6 +16,7 @@ const App = ({checkUserSession, currentUser}) => {
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession])
+  console.log(window.innerWidth); 
   
   return (
     <div>

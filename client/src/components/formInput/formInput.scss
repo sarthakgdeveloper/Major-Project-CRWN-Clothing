@@ -53,3 +53,10 @@ $main-color: black;
         @include shrinkLabel();
     }
 }
+
+@media only screen and (max-width: 600px){
+    .form-input-label{
+        font-size: 10px !important; 
+        top: -.7vw !important;
+    }
+}

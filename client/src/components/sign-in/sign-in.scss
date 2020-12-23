@@ -4,17 +4,33 @@
     flex-direction: column;
 
     h2{
-        font-size: 2vw;
+        font-size: 24px;
     }
     span{
-        font-size: 1.5vw;
+        font-size: 18px;
     }
     .title{
         margin: .7vw 0;
     }
 
     .button{
+        width: 100%;
         display: flex;
         justify-content: space-around;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .sign-in{
+        margin: 5vw 0;
+        width: 70%;
+
+        h2{
+            font-size: 18px;
+        }
+        span{
+            font-size: 12px;
+        }
     }
 }

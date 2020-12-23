@@ -3,10 +3,11 @@ import {Link} from 'react-router-dom';
  
 const optionContainer = css`
     text-decoration: none;
-    padding: .7vw 1vw;
+    padding: .7vw 0vw;
     cursor: pointer;
     text-transform: uppercase;
     font-size: 1vw;
+    display: flex; 
 `
 
 export const HeaderContainer = styled.div`
@@ -25,16 +26,16 @@ export const LogoContainer = styled.div`
 `;
     
 export const Logo = styled(Link)`
-    font-size: 1vw;
+    font-size: 12px;
     text-decoration: none;  
 `;
 
 export const OptionsContainer = styled.div`
-    width: 50%;
+    width: 30%;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
 `
 
 export const OptionLink = styled(Link)`
