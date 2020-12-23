@@ -7,11 +7,11 @@
   align-items: center;
 
   .loader {
-    border: 6px solid #f3f3f3;
+    border: .5vw solid #f3f3f3;
     border-radius: 50%;
-    border-top: 6px solid #676767;
-    width: 90px;
-    height: 90px;
+    border-top: .5vw solid #676767;
+    width: 7vw;
+    height: 7vw;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
     position: relative;
@@ -29,5 +29,6 @@
     0% { transform: rotate(0deg); }
     25% {-webkit-transform: rotate(250deg);}
     100% { transform: rotate(360deg); }
+
   }
 }

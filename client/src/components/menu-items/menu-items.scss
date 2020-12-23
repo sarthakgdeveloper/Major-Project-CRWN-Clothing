@@ -1,22 +1,15 @@
 .menu-item{
     min-width: 30%;
-    height: 240px;
+    height: 20vw;
+    width: 30vw; 
     display: flex;
     flex: auto;
     align-items: center;
     justify-content: center;
-    border: 1px solid #000;
-    margin: 7.5px;
+    border: .3px solid #000;
+    margin: .5vw;
     transition: .4s;
     overflow: hidden;
-
-    &:first-child{
-        margin-right: 7.5px;
-    }
-
-    &:last-child{
-        margin-left: 7.5px;
-    }
 
     &:hover{
         cursor: pointer;
@@ -40,31 +33,37 @@
     }
 
     .content{
-        height: 90px;
-        width: auto;
-        padding: 0 25px;
+        height: 6vw;
+        width: 7vw;
+        padding: 0 2.5vw;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         background-color: rgba(255, 255, 255, 0.7);
-        border: 1px solid #000;
+        border: .3px solid #000;
         position: absolute;
 
         .tittle{
             font-weight: bold;
-            margin-bottom: 6px;
-            font-size: 22px;
+            margin-bottom: .2vw;
+            font-size: 1.5vw;
             color: #4a4a4a;
         }
 
         .subtittle{
             font-weight: lighter;
-            font-size: 16px;
+            font-size: 1vw;
         }
     }
 }
 
 .large{
-    height: 380px;
+    height: 20vw;
 }
+
+@media only screen and (max-width: 600px) {
+    .menu-item{
+        width: 35vh;
+    }
+  }

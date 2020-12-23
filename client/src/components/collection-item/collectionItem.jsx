@@ -1,5 +1,4 @@
 import React from 'react';
-import './collectionItem.scss';
 import {connect} from 'react-redux';
 import {addItem} from '../../redux/cart/cart.action'
 import {CollectionFooterContainer, CollectionItemContainer, CustomButtonContainer, ImageContainer} from './collectionItem.style'

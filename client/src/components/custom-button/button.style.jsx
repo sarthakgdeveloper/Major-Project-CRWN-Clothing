@@ -8,13 +8,13 @@ const basicCustomButton = css`
     &:hover{
         background-color: #fff;
         color: #000;
-        border: 1px solid #000;
+        border: .3px solid #000;
     }
 `;
 const invertedCustomButton = css`
     background-color: #fff;
     color: #000;
-    border: 1px solid #000;
+    border: .3px solid #000;
         
     &:hover{
         background-color: black;
@@ -43,13 +43,13 @@ const buttonChecker = props => {
 }
 
 export const CustomButtonContainer = styled.button`
-    min-width: 165px;
+    min-width: 10vw;
     width: auto;
-    height: 50px;
+    height: 2vw;
     letter-spacing: 0.5px;
-    line-height: 50px;
-    padding: 0 35px 0 35px;
-    font-size: 15px;
+    line-height: 2vw;
+    padding: 0 1.5vw 0 1.5vw;
+    font-size: 1vw;
     text-transform: uppercase;
     font-family: 'Open Sans Condensed';
     font-weight: bolder;

@@ -1,23 +1,31 @@
 .cart-dropdown-item{
     display: flex;
     width: 100%;
-    height: 80px;
-    margin-bottom: 15px;
+    height: 5vw;
+    margin-bottom: 1vw;
     align-items: center;
     cursor: pointer;
     user-select: none;
 
     img{
-        width: 30%;
+        width: 25%;
     }
 
     .item-details{
-        width: 70%;
+        width: 55%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        padding: 10px 20px;
+        padding: .7vw 1.5vw;
+        margin: auto;
+    }
+    .quantity-handler{
+        width: 25%;
+        text-align: center;
+    }
+    .name,.price{
+        font-size: 1vw;
     }
 
 }

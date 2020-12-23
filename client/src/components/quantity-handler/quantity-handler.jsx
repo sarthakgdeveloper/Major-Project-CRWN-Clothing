@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {increaseQuantity, decreaseQuantity} from '../../redux/cart/cart.action';
+import './quantity-handler.scss'
 
 const QuantityHandler = ({dispatch, cartItem}) => {
     console.log(cartItem)

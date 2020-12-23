@@ -11,7 +11,9 @@ const CartDropDownItem = ({item}) => {
             <span className='name'>{name}</span>
             <span className='price'>{quantity} X ${price}</span>
         </div>
-        <QuantityHandler cartItem={item}/>
+        <div className='quantity-handler'>
+            <QuantityHandler cartItem={item}/>
+        </div>
     </div>
 )};
 
