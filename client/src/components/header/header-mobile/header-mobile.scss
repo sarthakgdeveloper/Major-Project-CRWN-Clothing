@@ -14,12 +14,6 @@
     top: 0;
 }
 
-
-
-
-
-
-
 .navbar-items{
     height: 100%;
     display: flex;
@@ -84,4 +78,10 @@
 }
 .clicked-hamburger-logo::after{
     transform: translate(9px, -1px) rotate(-45deg);
+}
+
+.cart{
+    position: absolute;
+    top: 0;
+    left: 46%;
 }

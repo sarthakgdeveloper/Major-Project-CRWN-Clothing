@@ -58,12 +58,10 @@
     }
 }
 
-.large{
-    height: 20vw;
-}
 
 @media only screen and (max-width: 600px) {
     .menu-item{
         width: 20vh;
+        height: 35vw;
     }
   }

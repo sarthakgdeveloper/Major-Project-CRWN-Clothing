@@ -2,6 +2,14 @@ import styled from 'styled-components';
 
 import CustomButton from '../custom-button/button';
 
+let change;
+
+if (window.innerWidth <= 600) {
+    change = true;
+} else {
+    change = false;
+}
+
 export const ImageContainer = styled.div`
     width: 100%;
     height: 95%;
@@ -39,7 +47,10 @@ export const CollectionItemContainer = styled.div`
     position: relative;
     cursor: pointer;
     margin: 2.5vw .7vw 1vw;
-
+    ${change ? `& ${CustomButtonContainer} {
+        display: inline;
+        opacity: 0.85;
+    }`: `
     &:hover ${CustomButtonContainer} {
         display: inline;
         opacity: 0.85;
@@ -48,4 +59,5 @@ export const CollectionItemContainer = styled.div`
     &:hover ${ImageContainer} {
         opacity: 0.8;
     }
+    `};
 `;

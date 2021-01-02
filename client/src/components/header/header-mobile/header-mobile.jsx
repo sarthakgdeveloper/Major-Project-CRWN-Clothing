@@ -11,10 +11,10 @@ import {createStructuredSelector} from 'reselect';
 import {signOutStart} from '../../../redux/user/user-action';
 import {Link} from 'react-router-dom'; 
 import {HeaderContainer, LogoContainer, Logo} from '../header-pc/header-pc.styles.jsx'
-// import Cart from '../../cart/cart'
-// import CartDropDown from '../../cartdropdown/cartdropdown';
+import Cart from '../../cart/cart'
+import CartDropDown from '../../cartdropdown/cartdropdown';
 
-{/* <div className='hamburger-icon'></div> */}
+
 const HeaderMobile = ({currentUser, signOut, cartHidden}) => {
 
   const [clicked, onClicked] = useState('');
@@ -23,7 +23,7 @@ const HeaderMobile = ({currentUser, signOut, cartHidden}) => {
       <div className={`navbar ${clicked?"drop-down-navbar":''}`}>
         <div className={`navbar-items ${clicked?"drop-down":''}`} onClick={() => {
           onClicked(!clicked)
-        }}>
+         }}>
           <div>
             <Link className='links' to='/shop'>Shop</Link>
           </div>
@@ -49,6 +49,12 @@ const HeaderMobile = ({currentUser, signOut, cartHidden}) => {
                   </Logo>
             </LogoContainer>
           </HeaderContainer>
+        </div>
+        <div className='cart'>
+          <Cart/>
+            {
+                cartHidden? null: <CartDropDown/>
+            }
         </div>
         <div className={`hamburger-logo ${clicked?"clicked-hamburger-logo":''}`} onClick={() => {
           console.log(clicked)

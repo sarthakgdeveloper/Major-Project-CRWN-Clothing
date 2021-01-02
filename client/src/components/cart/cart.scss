@@ -34,3 +34,23 @@
         font-size: 1vw;
     }
 }
+
+@media only screen and (max-width: 600px) {
+    .cart-item {
+
+        .cart-logo{
+            font-size: 4vw;
+        }
+
+        .cart-count-container{
+            top: .3vw;
+            left: 1.15vw;
+        }
+
+        .cart-count{
+            font-size: 2vw;
+        }
+    }
+    
+    
+}
