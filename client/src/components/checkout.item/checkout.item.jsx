@@ -5,24 +5,26 @@ import { removeItem } from "../../redux/cart/cart.action";
 import { connect } from "react-redux";
 
 const CheckoutItem = ({
-  cartItem: { name, imagesUrl, price, quantity },
+  cartItem: { name, imagesUrl, price },
   dispatch,
   cartItem,
-}) => (
-  <div className="checkout-item">
-    <div className="image-container">
-      <img src={imagesUrl[0]} alt="item" />
+}) => {
+  return (
+    <div className="checkout-item">
+      <div className="image-container">
+        <img src={imagesUrl[0]} alt="item" />
+      </div>
+      <span className="name">{name}</span>
+      <QuantityHandler cartItem={cartItem} />
+      <span className="price">₹{price}</span>
+      <div
+        className="remove-button"
+        onClick={() => dispatch(removeItem(cartItem))}
+      >
+        &#10005;
+      </div>
     </div>
-    <span className="name">{name}</span>
-    <QuantityHandler cartItem={cartItem} />
-    <span className="price">₹{price}</span>
-    <div
-      className="remove-button"
-      onClick={() => dispatch(removeItem(cartItem))}
-    >
-      &#10005;
-    </div>
-  </div>
-);
+  );
+};
 
 export default connect(null)(CheckoutItem);

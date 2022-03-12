@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Axios from "axios";
 import HomePage from "./components/homepage/homepage.component";
 import ShopPage from "./components/shop/shop-page-component";
 import SignUpAndSignIn from "./components/sign-in-and-sign-up/sign-in-and-sign-up";

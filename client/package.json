@@ -4,14 +4,13 @@
   "private": true,
   "proxy": "http://localhost:5000/",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.0.0",
-    "@fortawesome/react-fontawesome": "^0.1.17",
     "axios": "0.19.0",
     "firebase": "^8.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "7.0.3",
     "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.1",
     "react-stripe-checkout": "2.6.3",
     "redux": "4.0.1",
     "redux-logger": "3.0.6",
@@ -19,8 +18,7 @@
     "redux-saga": "1.0.2",
     "redux-thunk": "2.3.0",
     "reselect": "4.0.0",
-    "styled-components": "4.2.0",
-    "react-scripts": "^4.0.1"
+    "styled-components": "4.2.0"
   },
   "resolutions": {
     "babel-jest": "26.6.3"

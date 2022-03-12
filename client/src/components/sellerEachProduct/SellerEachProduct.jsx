@@ -16,6 +16,7 @@ function SellerEachProduct({ product }) {
           onClick={() =>
             selectedPhoto > 0 && setSelectedPhoto(selectedPhoto - 1)
           }
+          style={selectedPhoto === 0 ? { opacity: "0.5" } : {}}
         >
           &#8656;
         </span>
@@ -23,6 +24,11 @@ function SellerEachProduct({ product }) {
           onClick={() =>
             selectedPhoto < product?.imagesUrl?.length - 1 &&
             setSelectedPhoto(selectedPhoto + 1)
+          }
+          style={
+            selectedPhoto === product?.imagesUrl.length - 1
+              ? { opacity: "0.5" }
+              : {}
           }
         >
           &#8658;

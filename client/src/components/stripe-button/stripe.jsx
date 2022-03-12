@@ -1,6 +1,6 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
+import Axios from "axios";
 
 const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
@@ -8,7 +8,7 @@ const StripeCheckoutButton = ({ price }) => {
     "pk_test_51HpxK1IbJYnQVMfm6pmP5rA8Mv4tbfuWgIiBQHXvbaOFGswb4RsJyUizyTsKTtfTYWK4E4QmIocyPTtqOuzfcOOe00GBJJmfoh";
 
   const onToken = (token) => {
-    axios({
+    Axios({
       url: "payment",
       method: "post",
       data: {
@@ -31,7 +31,7 @@ const StripeCheckoutButton = ({ price }) => {
   return (
     <StripeCheckout
       label="Pay Now"
-      name="CRWN Clothing Ltd."
+      name="Mutka Ltd."
       billingAddress
       shippingAddress
       image="https://svgshare.com/i/CUz.svg"
