@@ -5,8 +5,9 @@ export const setCurrentUser = (user) => ({
     payload: user,
 })
 
-export const googleSignInStart = () => ({
-    type: userActionTypes.GOOGLE_SIGN_IN_START
+export const googleSignInStart = (selectedUser) => ({
+    type: userActionTypes.GOOGLE_SIGN_IN_START,
+    payload: selectedUser
 })
 export const signUpStart = (info) => ({
     type: userActionTypes.SIGN_UP_START,

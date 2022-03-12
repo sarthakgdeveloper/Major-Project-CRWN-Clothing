@@ -1,0 +1,40 @@
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { getStoreData } from "../../firebase/firebase.utils";
+import "./sellerdashboard.scss";
+import SellerEachProduct from "../sellerEachProduct/SellerEachProduct";
+
+function SellerDashboard({ currentUser }) {
+  const [data, setData] = useState([]);
+
+  const gettingStoreData = async (storeIds) => {
+    await getStoreData(storeIds, setData);
+  };
+
+  useEffect(() => {
+    return () => setData([]);
+  }, []);
+
+  useEffect(() => {
+    if (currentUser?.storeIds) {
+      gettingStoreData(currentUser.storeIds);
+    }
+  }, [currentUser]);
+
+  return (
+    <div className="sellerProducts_container">
+      {data &&
+        data.map((product, index) => (
+          <SellerEachProduct product={product} key={index} />
+        ))}
+    </div>
+  );
+}
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(SellerDashboard);

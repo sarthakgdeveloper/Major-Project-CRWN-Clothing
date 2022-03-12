@@ -1,46 +1,47 @@
-import React, {useEffect} from 'react';
-import {HomePage} from './components/homepage/homepage.component';
-import ShopPage from './components/shop/shop-page-component';
-import SignUpAndSignIn from './components/sign-in-and-sign-up/sign-in-and-sign-up';
-import {connect} from 'react-redux'
-import Header from './components/header/header';
-import {checkUserSession} from './redux/user/user-action';
-import {Switch, Route, Redirect} from 'react-router-dom';
-import { selectCurrentUser } from './redux/user/user.selector'
-import {createStructuredSelector} from 'reselect'
-import CheckOut from './components/checkout/checkout'
-import './App.css';
+import React, { useEffect } from "react";
+import HomePage from "./components/homepage/homepage.component";
+import ShopPage from "./components/shop/shop-page-component";
+import SignUpAndSignIn from "./components/sign-in-and-sign-up/sign-in-and-sign-up";
+import { connect } from "react-redux";
+import Header from "./components/header/header";
+import SellerAddProduct from "./components/sellerAddProduct/SellerAddProduct";
+import { checkUserSession } from "./redux/user/user-action";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
+import CheckOut from "./components/checkout/checkout";
+import "./App.css";
 
-
-const App = ({checkUserSession, currentUser}) => {
+const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
     checkUserSession();
-  }, [checkUserSession])
-  console.log(window.innerWidth); 
-  
+  }, [checkUserSession]);
+
   return (
     <div>
-      <Header/>
+      <Header />
       <Switch>
-        <Route exact path='/' component = {HomePage} />
-        <Route path='/shop' component = {ShopPage} />
-        <Route path='/checkout' component = {CheckOut} />
-        <Route path='/signin' render = {() => 
-          currentUser ? < Redirect to='/'/> : <SignUpAndSignIn/>
-        } />
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route path="/checkout" component={CheckOut} />
+        <Route
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignUpAndSignIn />
+          }
+        />
+        <Route path="/:user/add-product" component={SellerAddProduct} />
       </Switch>
     </div>
   );
-}
-
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  checkUserSession: () => dispatch(checkUserSession())
-})
-
+  checkUserSession: () => dispatch(checkUserSession()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

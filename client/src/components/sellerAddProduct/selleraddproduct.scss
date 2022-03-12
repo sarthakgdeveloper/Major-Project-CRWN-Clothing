@@ -1,0 +1,24 @@
+#image__container .container {
+  height: 90%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow: auto;
+
+  .item {
+    margin: 10px;
+    text-align: center;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+#image__container #addMore__images {
+  margin: 10px 0;
+  height: 10%;
+  width: 100%;
+}
