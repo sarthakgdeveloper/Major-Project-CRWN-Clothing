@@ -19,9 +19,7 @@
     "redux-saga": "1.0.2",
     "redux-thunk": "2.3.0",
     "reselect": "4.0.0",
-    "styled-components": "4.2.0"
-  },
-  "devDependencies": {
+    "styled-components": "4.2.0",
     "react-scripts": "^4.0.1"
   },
   "resolutions": {
