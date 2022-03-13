@@ -87,6 +87,7 @@ export const createUserProfileDocument = async (
     };
     if (selectedUser === "Karigar") {
       newData.storeIds = [];
+      newData.category = [];
     }
     try {
       userRef.set(newData);
@@ -95,6 +96,27 @@ export const createUserProfileDocument = async (
     }
   }
   return userRef;
+};
+
+export const getSellerOrders = async (id, getOrderData) => {
+  const orderRef = firestore.collection("orders").where("uid", "==", id);
+  const orderSnapshot = await orderRef.get();
+  const orderData = orderSnapshot.docs.map(async (doc) => {
+    const { id, quantity, userInfo } = doc.data();
+    const productRef = firestore.doc(`products/${id}`);
+    const snapshot = await productRef.get();
+    const data = snapshot.data();
+    getOrderData((pData) => {
+      return [
+        ...pData,
+        {
+          ...data,
+          quantity,
+          userInfo,
+        },
+      ];
+    });
+  });
 };
 
 firebase.initializeApp(config);
@@ -185,18 +207,20 @@ const uploadingProduct = async (
       ...newProduct,
     });
 
-    console.log(sellerData);
-
     if (snapshot.exists && sellerData?.storeIds.length > 0) {
       await sellerRef.update({
         ...sellerData,
         storeIds: [...sellerData?.storeIds, sellerEachProductRef?.id],
+        category: sellerData.category.includes(category)
+          ? [...sellerData.category]
+          : [...sellerData?.category, category],
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
     } else {
       await sellerRef.set({
         ...sellerData,
         storeIds: [sellerEachProductRef.id],
+        category: [category],
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
     }
@@ -257,6 +281,33 @@ export const uploadNewProduct = async (
           });
       }
     );
+  });
+};
+
+export const sendUsersOrders = async ({
+  order,
+  address_city,
+  address_country,
+  address_line1,
+  address_zip,
+  name,
+}) => {
+  await order.forEach(async (data) => {
+    const { id, quantity, uid } = data;
+    const orderRef = firestore.collection("orders").doc();
+    const orderInfo = {
+      id,
+      quantity,
+      uid,
+      userInfo: {
+        address_city,
+        address_country,
+        address_line1,
+        address_zip,
+        name,
+      },
+    };
+    await orderRef.set(orderInfo);
   });
 };
 export const auth = firebase.auth();

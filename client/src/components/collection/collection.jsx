@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import "./collection.scss";
 
 const collectionPage = ({ CollectionItems, match }) => {
-  console.log(CollectionItems);
-
   return CollectionItems ? (
     <div className="collection">
       <div className="title">{match.params.collectionId}</div>

@@ -33,17 +33,20 @@ const CheckOut = ({ cartItem, cartTotal }) => (
     ))}
 
     <div className="total">
-      <span>TOTAL: ₹{cartTotal}</span>
+      <span>CGST(15%) = </span>{" "}
+      <span>TOTAL: ₹{Math.ceil(cartTotal + (15 / 100) * cartTotal)}</span>
     </div>
 
     {cartTotal ? (
-      <div>
+      <div style={{ textAlign: "center" }}>
         <div className="test-warning">
           *Please use the following test credit card for payments*
           <br />
-          4242 4242 4242 4242 - Exp: 12/20 - CVV: 123
+          4242 4242 4242 4242 - Exp: 12/22 - CVV: 123
         </div>
-        <StripeCheckoutButton price={cartTotal} />
+        <StripeCheckoutButton
+          price={Math.ceil(cartTotal + (15 / 100) * cartTotal)}
+        />
       </div>
     ) : null}
   </div>

@@ -12,6 +12,7 @@ import { selectCurrentUser } from "./redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
 import CheckOut from "./components/checkout/checkout";
 import "./App.css";
+import SellerOrders from "./components/sellersOrders/SellerOrders";
 
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
@@ -32,6 +33,7 @@ const App = ({ checkUserSession, currentUser }) => {
           }
         />
         <Route path="/:user/add-product" component={SellerAddProduct} />
+        <Route path="/orders" component={SellerOrders} />
       </Switch>
     </div>
   );

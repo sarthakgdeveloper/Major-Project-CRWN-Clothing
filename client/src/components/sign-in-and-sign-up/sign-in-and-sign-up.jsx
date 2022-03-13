@@ -26,13 +26,14 @@ const SignInAndSingUp = () => {
           name="switchPlan"
           value="Karigar"
           onChange={(e) => {
+            console.log("yes");
             setSelectedUser(e.target.value);
           }}
         />
         <label for="switchGharak">Gharak</label>
         <label for="switchKarigar">Karigar</label>
-        <div class="switch-wrapper">
-          <div class="switch">
+        <div className="switch-wrapper">
+          <div className="switch">
             <div>Gharak</div>
             <div>Karigar</div>
           </div>

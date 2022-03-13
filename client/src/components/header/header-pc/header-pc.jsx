@@ -35,9 +35,17 @@ const HeaderPc = ({ currentUser, signOut, cartHidden }) => {
         ) : (
           currentUser?.user === "Karigar" && <SellerProfile />
         )}
-        <OptionLink to="/contact">
-          <span>Contact</span>
-        </OptionLink>
+        {currentUser?.user !== "Karigar" ? (
+          <OptionLink to="/sellers">
+            <span>Sellers</span>
+          </OptionLink>
+        ) : (
+          currentUser?.user === "Karigar" && (
+            <OptionLink to="/orders">
+              <span>Orders</span>
+            </OptionLink>
+          )
+        )}
         {currentUser ? (
           <OptionDiv onClick={() => signOut()}>sign out</OptionDiv>
         ) : (

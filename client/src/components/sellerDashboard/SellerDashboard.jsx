@@ -24,11 +24,14 @@ function SellerDashboard({ currentUser }) {
   }, [currentUser]);
 
   return (
-    <div className="sellerProducts_container">
-      {data &&
-        data.map((product, index) => (
-          <SellerEachProduct product={product} key={index} />
-        ))}
+    <div className="seller_dashboard">
+      <span className="seller_displayName">{currentUser?.displayName}</span>
+      <div className="sellerProducts_container">
+        {data &&
+          data.map((product, index) => (
+            <SellerEachProduct product={product} key={index} />
+          ))}
+      </div>
     </div>
   );
 }

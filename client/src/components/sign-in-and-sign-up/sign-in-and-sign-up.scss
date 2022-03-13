@@ -65,6 +65,7 @@
     text-align: center;
     cursor: pointer;
     color: var(--switches-label-color);
+    user-select: none;
   }
 
   /* switch highlighters wrapper (sliding left / right) 

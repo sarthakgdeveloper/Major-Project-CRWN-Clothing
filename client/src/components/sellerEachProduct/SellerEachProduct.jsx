@@ -3,9 +3,7 @@ import "./sellereachproduct.scss";
 import { useState } from "react";
 
 function SellerEachProduct({ product }) {
-  const [selectedPhoto, setSelectedPhoto] = useState(
-    product?.imagesUrl?.length - 1
-  );
+  const [selectedPhoto, setSelectedPhoto] = useState(0);
   return (
     <div className="sellerEachProduct_container">
       <div

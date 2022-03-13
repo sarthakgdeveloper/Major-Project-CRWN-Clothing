@@ -66,7 +66,6 @@ const HeaderMobile = ({ currentUser, signOut, cartHidden }) => {
       <div
         className={`hamburger-logo ${clicked ? "clicked-hamburger-logo" : ""}`}
         onClick={() => {
-          console.log(clicked);
           return onClicked(!clicked);
         }}
       >

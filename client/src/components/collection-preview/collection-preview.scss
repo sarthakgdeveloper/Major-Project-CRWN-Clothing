@@ -1,15 +1,16 @@
-.collection-preview{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2vw;
-    
-    .title{
-        font-size: 2vw;
-        margin-bottom: 1.8vw;
-    }
+.collection-preview {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2vw;
 
-    .preview{
-        display: flex;
-        justify-content: space-between;
-    }
+  .title {
+    font-size: 2vw;
+    margin-bottom: 1.8vw;
+  }
+
+  .preview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    // justify-content: space-between;
+  }
 }

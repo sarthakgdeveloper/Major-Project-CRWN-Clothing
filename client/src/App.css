@@ -7,8 +7,8 @@
 body {
   padding: 1vw 2.5vw;
   /* height: 100vh;
-  width: 100vw;
-  overflow-x: hidden; */
+  width: 100vw; */
+  overflow-x: hidden;
 }
 
 a {
