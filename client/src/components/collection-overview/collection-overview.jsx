@@ -7,18 +7,6 @@ import { createStructuredSelector } from "reselect";
 const CollectionOverview = ({ collections }) => {
   return (
     <div className="collection-overview">
-      {/* {collections
-        ? Object.values(collections).map((item) => {
-            console.log(item);
-            return (
-              <CollectionPreview
-                // key={id}
-                // title={title}
-                items={Object.values(collections)}
-              />
-            );
-          })
-        : null} */}
       {collections
         ? Object.keys(collections).map((title) => (
             <CollectionPreview

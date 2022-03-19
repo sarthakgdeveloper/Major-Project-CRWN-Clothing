@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   googleSignInStart,
   emailSignInStart,
@@ -11,6 +12,7 @@ import FormInput from "../formInput/formInput";
 import "./sign-in.scss";
 
 const SingIn = ({ emailSignInStart, googleSignInStart, selectedUser }) => {
+  const { t } = useTranslation();
   const [userCredentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -29,8 +31,8 @@ const SingIn = ({ emailSignInStart, googleSignInStart, selectedUser }) => {
 
   return (
     <div className="sign-in">
-      <h2>I already have an account</h2>
-      <span>Sign in with your email and password</span>
+      <h2>{t("sign_in_first_line")}</h2>
+      <span>{t("sign_in_second_line")}</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           type="email"
@@ -38,7 +40,7 @@ const SingIn = ({ emailSignInStart, googleSignInStart, selectedUser }) => {
           name="email"
           value={email}
           handleChange={handleChange}
-          label="email"
+          label={t("email")}
           required
         />
         <FormInput
@@ -47,17 +49,17 @@ const SingIn = ({ emailSignInStart, googleSignInStart, selectedUser }) => {
           name="password"
           value={password}
           handleChange={handleChange}
-          label="password"
+          label={t("password")}
           required
         />
         <div className="button">
-          <CustomButtom type="submit">sign in</CustomButtom>
+          <CustomButtom type="submit">{t("sign_in")}</CustomButtom>
           <CustomButtom
             type="button"
             onClick={() => googleSignInStart(selectedUser)}
             isGoogleSignIn
           >
-            sign in with google
+            {t("google_sign_in")}
           </CustomButtom>
         </div>
       </form>

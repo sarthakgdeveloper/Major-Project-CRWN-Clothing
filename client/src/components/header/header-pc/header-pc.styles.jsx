@@ -28,6 +28,7 @@ export const LogoContainer = styled.div`
 export const Logo = styled(Link)`
   font-size: 28px;
   text-decoration: none;
+  color: #000;
 `;
 
 export const OptionsContainer = styled.div`
@@ -40,6 +41,7 @@ export const OptionsContainer = styled.div`
 
 export const OptionLink = styled(Link)`
   ${optionContainer}
+  color: #000;
 `;
 export const OptionDiv = styled.div`
   ${optionContainer}

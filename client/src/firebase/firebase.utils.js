@@ -310,6 +310,29 @@ export const sendUsersOrders = async ({
     await orderRef.set(orderInfo);
   });
 };
+
+export const sendNewAuctionBid = async (auctionId, user, bidAmount) => {
+  if (!auctionId) return;
+  const auctionRef = firestore.doc(`auctions/${auctionId}`);
+  const snapshot = await auctionRef.get();
+  const auctionData = snapshot.data();
+  if (
+    auctionData?.highest_bid < bidAmount &&
+    auctionData?.highest_bid_user !== user?.id
+  ) {
+    await auctionRef.update({
+      ...auctionData,
+      highest_bid: bidAmount,
+      highest_bid_user: user?.id,
+      highest_bid_user_name: user?.displayName,
+    });
+
+    return true;
+  }
+
+  return false;
+};
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 const fireStorage = firebase.storage();

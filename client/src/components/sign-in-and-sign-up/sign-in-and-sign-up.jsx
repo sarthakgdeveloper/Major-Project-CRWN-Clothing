@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import SingIn from "../sign-in/sign-in";
 import SignUp from "../signup/signup";
@@ -7,6 +8,7 @@ import "./sign-in-and-sign-up.scss";
 
 const SignInAndSingUp = () => {
   const [selectedUser, setSelectedUser] = useState("Gharak");
+  const { t } = useTranslation();
   return (
     <div className="sign-in-sign-up">
       <div class="switches-container">
@@ -26,16 +28,15 @@ const SignInAndSingUp = () => {
           name="switchPlan"
           value="Karigar"
           onChange={(e) => {
-            console.log("yes");
             setSelectedUser(e.target.value);
           }}
         />
-        <label for="switchGharak">Gharak</label>
-        <label for="switchKarigar">Karigar</label>
+        <label for="switchGharak">{t("Gharak")}</label>
+        <label for="switchKarigar">{t("Karigar")}</label>
         <div className="switch-wrapper">
           <div className="switch">
-            <div>Gharak</div>
-            <div>Karigar</div>
+            <div>{t("Gharak")}</div>
+            <div>{t("Karigar")}</div>
           </div>
         </div>
       </div>

@@ -1,8 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./sellereachproduct.scss";
 import { useState } from "react";
 
 function SellerEachProduct({ product }) {
+  const { t } = useTranslation();
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   return (
     <div className="sellerEachProduct_container">
@@ -40,7 +42,7 @@ function SellerEachProduct({ product }) {
       </div>
       <div className="productDetails">
         <span>{product?.productName}</span>
-        <span>{product?.category}</span>
+        <span>{t(product?.category.toLowerCase())}</span>
         <span>₹{product?.price}</span>
       </div>
     </div>

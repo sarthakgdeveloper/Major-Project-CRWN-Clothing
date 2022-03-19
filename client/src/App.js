@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Axios from "axios";
 import HomePage from "./components/homepage/homepage.component";
 import ShopPage from "./components/shop/shop-page-component";
 import SignUpAndSignIn from "./components/sign-in-and-sign-up/sign-in-and-sign-up";
@@ -13,6 +12,7 @@ import { createStructuredSelector } from "reselect";
 import CheckOut from "./components/checkout/checkout";
 import "./App.css";
 import SellerOrders from "./components/sellersOrders/SellerOrders";
+import ProductAuction from "./components/productAuction/ProductAuction";
 
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
@@ -34,6 +34,7 @@ const App = ({ checkUserSession, currentUser }) => {
         />
         <Route path="/:user/add-product" component={SellerAddProduct} />
         <Route path="/orders" component={SellerOrders} />
+        <Route path="/auction/:id" component={ProductAuction} />
       </Switch>
     </div>
   );

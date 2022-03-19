@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { signUpStart } from "../../redux/user/user-action";
 import CustomButtom from "../custom-button/button";
 import FormInput from "../formInput/formInput";
@@ -7,6 +8,7 @@ import FormInput from "../formInput/formInput";
 import "./signup.scss";
 
 const SignUp = ({ signUpStart, selectedUser }) => {
+  const { t } = useTranslation();
   const [userCredentials, setCredentials] = useState({
     displayName: "",
     email: "",
@@ -34,8 +36,8 @@ const SignUp = ({ signUpStart, selectedUser }) => {
 
   return (
     <div className="sign-in">
-      <h2 className="title">Don't have an Account</h2>
-      <span>Sign up to create a new one</span>
+      <h2 className="title">{t("sign_up_first_line")}</h2>
+      <span>{t("sign_up_second_line")}</span>
       <form onSubmit={handleSubmit} className="sign-up-form">
         <FormInput
           type="text"
@@ -43,7 +45,7 @@ const SignUp = ({ signUpStart, selectedUser }) => {
           name="displayName"
           value={displayName}
           handleChange={handleChange}
-          label="name"
+          label={t("name")}
           required
         />
         <FormInput
@@ -52,7 +54,7 @@ const SignUp = ({ signUpStart, selectedUser }) => {
           name="email"
           value={email}
           handleChange={handleChange}
-          label="email"
+          label={t("email")}
           required
         />
         <FormInput
@@ -61,7 +63,7 @@ const SignUp = ({ signUpStart, selectedUser }) => {
           name="password"
           value={password}
           handleChange={handleChange}
-          label="password"
+          label={t("password")}
           required
         />
         <FormInput
@@ -70,10 +72,10 @@ const SignUp = ({ signUpStart, selectedUser }) => {
           name="confirmPassword"
           value={confirmPassword}
           handleChange={handleChange}
-          label="confirm password"
+          label={t("confirm_password")}
           required
         />
-        <CustomButtom type="submit">sign up</CustomButtom>
+        <CustomButtom type="submit">{t("sign_up")}</CustomButtom>
       </form>
     </div>
   );

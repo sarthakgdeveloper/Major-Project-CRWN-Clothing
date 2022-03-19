@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import Loader from "../loader/loader";
+import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
@@ -9,6 +10,7 @@ import "./selleraddproduct.scss";
 
 function SellerAddProduct({ currentUser }) {
   const [productCategory, setProductCategory] = useState("");
+  const { t } = useTranslation();
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productImages, setProductImages] = useState("");
@@ -19,13 +21,28 @@ function SellerAddProduct({ currentUser }) {
   const container = useRef();
   const imageContainer = useRef();
 
-  const supportedCategory = {
-    Handicraft: true,
-    Florist: true,
-    Sculpture: true,
-    Artist: true,
-    Instrument: true,
-  };
+  const categoriesArr = [
+    {
+      key: "Handicraft",
+      value: t("handicraft"),
+    },
+    {
+      key: "Artist",
+      value: t("artist"),
+    },
+    {
+      key: "Sculpture",
+      value: t("sculpture"),
+    },
+    {
+      key: "Florist",
+      value: t("florist"),
+    },
+    {
+      key: "Instrument",
+      value: t("instrument"),
+    },
+  ];
 
   const createImage = (url) =>
     new Promise((resolve, reject) => {
@@ -52,13 +69,11 @@ function SellerAddProduct({ currentUser }) {
 
   const onProductSubmit = async (e) => {
     e.preventDefault();
-    if (!supportedCategory[productCategory])
-      return alert("Select a correct Category");
     isUploaded(false);
     isLoading(true);
     await uploadNewProduct(
       productImages,
-      productCategory,
+      productCategory?.key,
       productName,
       productPrice,
       currentUser,
@@ -68,7 +83,7 @@ function SellerAddProduct({ currentUser }) {
   };
 
   const handleProductCategory = (e) => {
-    return setProductCategory(e.target.value);
+    return setProductCategory(e);
   };
   const handleProductName = (e) => {
     return setProductName(e.target.value);
@@ -84,25 +99,39 @@ function SellerAddProduct({ currentUser }) {
       <div className="w-full p-10 bg-white rounded-xl z-10 sm:max-w-lg">
         <div className="text-center">
           <h2 className="mt-5 text-3xl font-bold text-gray-900">
-            Add a new product!
+            {t("add_new_product")}
           </h2>
         </div>
         <form className="mt-8 space-y-3" onSubmit={onProductSubmit}>
           <div className="grid grid-cols-1 space-y-2">
+            <div class="dropdown">
+              <button
+                class="btn dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {productCategory?.value || t("select_category")}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                {categoriesArr.map((eCat) => (
+                  <li key={eCat.key}>
+                    <button
+                      class="dropdown-item"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleProductCategory(eCat);
+                      }}
+                    >
+                      {eCat.value}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <label className="text-sm font-bold text-gray-500 tracking-wide">
-              Product Category
-            </label>
-            <input
-              className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-              type="text"
-              required="required"
-              name="category"
-              onChange={handleProductCategory}
-              value={productCategory}
-              placeholder="Supported: Handicraft, Florist, Sculpture, Artist, Instrument"
-            />
-            <label className="text-sm font-bold text-gray-500 tracking-wide">
-              Product Name
+              {t("product_name")}
             </label>
             <input
               className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
@@ -113,7 +142,7 @@ function SellerAddProduct({ currentUser }) {
               value={productName}
             />
             <label className="text-sm font-bold text-gray-500 tracking-wide">
-              Product Price
+              {t("product_price")}
             </label>
             <input
               className="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
@@ -126,7 +155,7 @@ function SellerAddProduct({ currentUser }) {
           </div>
           <div className="grid grid-cols-1 space-y-2">
             <label className="text-sm font-bold text-gray-500 tracking-wide">
-              Select Image
+              {t("select_image")}
             </label>
             <div className="flex items-center justify-center w-full">
               <div
@@ -151,12 +180,7 @@ function SellerAddProduct({ currentUser }) {
                     />
                   </div>
                   <p className="pointer-none text-gray-500">
-                    <span className="text-sm">Drag and drop</span> files here{" "}
-                    <br /> or{" "}
-                    <a className="text-blue-600 hover:underline" id="">
-                      select a file
-                    </a>{" "}
-                    from your computer
+                    {t("image_para")}
                   </p>
                 </div>
               </label>
@@ -173,14 +197,14 @@ function SellerAddProduct({ currentUser }) {
             />
           </div>
           <p className="text-sm text-dark-300">
-            <span>File type: jpeg, jpg types of images</span>
+            <span>{t("file_type")}</span>
           </p>
           <div>
             <button
               className="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-300 focus:outline-none focus:shadow-outline hover:bg-blue-600"
               type="submit"
             >
-              Upload
+              {t("product_upload")}
             </button>
           </div>
         </form>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { addItem } from "../../redux/cart/cart.action";
 import {
@@ -11,6 +12,7 @@ import {
 } from "./collectionItem.style";
 
 const CollectionItem = ({ item, addItem }) => {
+  const { t } = useTranslation();
   const {
     items: { productName: name, price, imagesUrl },
   } = item;
@@ -53,7 +55,7 @@ const CollectionItem = ({ item, addItem }) => {
         <span>₹{price}</span>
       </CollectionFooterContainer>
       <CustomButtonContainer onClick={() => addItem(item?.items)}>
-        Add To Cart
+        {t("add_to_cart")}
       </CustomButtonContainer>
     </CollectionItemContainer>
   );

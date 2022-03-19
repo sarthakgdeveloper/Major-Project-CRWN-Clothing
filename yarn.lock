@@ -1165,6 +1165,11 @@
     "locate-path" "^5.0.0"
     "path-exists" "^4.0.0"
 
+"flag-icon-css@^4.1.7":
+  "integrity" "sha512-AFjSU+fv98XbU0vnTQ32vcLj89UEr1MhwDFcooQv14qWJCjg9fGZzfh9BVyDhAhIOZW/pGmJmq38RqpgPaeybQ=="
+  "resolved" "https://registry.npmjs.org/flag-icon-css/-/flag-icon-css-4.1.7.tgz"
+  "version" "4.1.7"
+
 "for-in@^1.0.2":
   "integrity" "sha1-gQaNKVqBQuwKxybG4iAMMPttXoA="
   "resolved" "https://registry.npmjs.org/for-in/-/for-in-1.0.2.tgz"
