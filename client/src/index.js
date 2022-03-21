@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "flag-icons/css/flag-icons.min.css";
 
 import "./index.css";
+import Loader from "./components/loader/loader";
 
 i18n
   .use(initReactI18next)
@@ -30,18 +31,17 @@ i18n
     backend: {
       loadPath: "/assets/locale/{{lng}}/translation.json",
     },
-    react: {
-      useSuspense: false,
-    },
   });
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <PersistGate persistor={persister}>
-        <App />
-      </PersistGate>
-    </BrowserRouter>
-  </Provider>,
+  <Suspense fallback={<Loader />}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <PersistGate persistor={persister}>
+          <App />
+        </PersistGate>
+      </BrowserRouter>
+    </Provider>
+  </Suspense>,
   document.getElementById("root")
 );

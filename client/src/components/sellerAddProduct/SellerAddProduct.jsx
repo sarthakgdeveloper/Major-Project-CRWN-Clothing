@@ -6,6 +6,8 @@ import { Redirect } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { uploadNewProduct } from "../../firebase/firebase.utils";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import "./selleraddproduct.scss";
 
 function SellerAddProduct({ currentUser }) {
@@ -173,10 +175,11 @@ function SellerAddProduct({ currentUser }) {
               >
                 <div className="h-full w-full text-center flex flex-col items-center justify-center items-center">
                   <div className="flex flex-auto max-h-48 mx-auto -mt-10 w-2/5">
-                    <img
+                    <LazyLoadImage
                       className="has-mask h-36 object-center"
                       src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&amp;ext=jpg"
                       alt="freepik image"
+                      effect="blur"
                     />
                   </div>
                   <p className="pointer-none text-gray-500">

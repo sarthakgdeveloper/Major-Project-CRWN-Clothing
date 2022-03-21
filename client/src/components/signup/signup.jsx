@@ -6,6 +6,7 @@ import CustomButtom from "../custom-button/button";
 import FormInput from "../formInput/formInput";
 
 import "./signup.scss";
+import { FALSE } from "sass";
 
 const SignUp = ({ signUpStart, selectedUser }) => {
   const { t } = useTranslation();
@@ -20,7 +21,9 @@ const SignUp = ({ signUpStart, selectedUser }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    signUpStart({
+    const isValid = formValidator();
+    if (!isValid) return;
+    return signUpStart({
       email,
       displayName,
       password,
@@ -32,6 +35,19 @@ const SignUp = ({ signUpStart, selectedUser }) => {
   const handleChange = (event) => {
     const { value, name } = event.target;
     setCredentials({ ...userCredentials, [name]: value });
+  };
+
+  const formValidator = () => {
+    const isNumberinName = displayName.match(/\d+/g);
+    if (isNumberinName) {
+      alert("Display Name can not include numbers");
+      return false;
+    }
+    if (password.length < 7) {
+      alert("password length should be equal or greater than 7");
+      return false;
+    }
+    return true;
   };
 
   return (

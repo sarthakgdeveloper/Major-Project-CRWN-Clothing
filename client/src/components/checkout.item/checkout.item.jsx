@@ -1,8 +1,10 @@
 import React from "react";
-import "./checkout.item.scss";
 import QuantityHandler from "../quantity-handler/quantity-handler";
 import { removeItem } from "../../redux/cart/cart.action";
 import { connect } from "react-redux";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import "./checkout.item.scss";
 
 const CheckoutItem = ({
   cartItem: { name, imagesUrl, price },
@@ -12,7 +14,7 @@ const CheckoutItem = ({
   return (
     <div className="checkout-item">
       <div className="image-container">
-        <img src={imagesUrl[0]} alt="item" />
+        <LazyLoadImage src={imagesUrl[0]} alt="item" effect="blur" />
       </div>
       <span className="name">{name}</span>
       <QuantityHandler cartItem={cartItem} />

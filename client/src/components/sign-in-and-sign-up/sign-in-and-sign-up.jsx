@@ -11,7 +11,7 @@ const SignInAndSingUp = () => {
   const { t } = useTranslation();
   return (
     <div className="sign-in-sign-up">
-      <div class="switches-container">
+      <div className="switches-container">
         <input
           type="radio"
           id="switchGharak"

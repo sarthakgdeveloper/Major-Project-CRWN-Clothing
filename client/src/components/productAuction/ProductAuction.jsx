@@ -4,6 +4,8 @@ import { firestore, sendNewAuctionBid } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import "./productauction.scss";
 import { useEffect, useState } from "react";
 
@@ -86,7 +88,11 @@ function ProductAuction({ match, currentUser }) {
           <p>{productData?.productName}</p>
           <div className="product_card">
             <div className="productImage_container">
-              <img src={productData?.imagesUrl[0]} alt="" />
+              <LazyLoadImage
+                src={productData?.imagesUrl[0]}
+                alt=""
+                effect="blur"
+              />
             </div>
             <div className="auctionData">
               <div className="highestBid_details">

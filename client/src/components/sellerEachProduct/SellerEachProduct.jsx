@@ -1,7 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import "./sellereachproduct.scss";
 import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import "./sellereachproduct.scss";
 
 function SellerEachProduct({ product }) {
   const { t } = useTranslation();
@@ -35,9 +37,10 @@ function SellerEachProduct({ product }) {
         </span>
       </div>
       <div className="productImage_container">
-        <img
+        <LazyLoadImage
           src={product?.imagesUrl[selectedPhoto]}
           alt={product?.productName}
+          effect="blur"
         />
       </div>
       <div className="productDetails">

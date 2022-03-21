@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { addItem } from "../../redux/cart/cart.action";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import {
   CollectionFooterContainer,
   CollectionItemContainer,
@@ -21,9 +23,7 @@ const CollectionItem = ({ item, addItem }) => {
 
   return (
     <CollectionItemContainer>
-      <ImageContainer
-        style={{ backgroundImage: `url(${imagesUrl[selectedPhoto]})` }}
-      >
+      <ImageContainer>
         <ImageShifter
           style={
             imagesUrl.length > 1 ? { display: "flex" } : { display: "none" }
@@ -49,6 +49,23 @@ const CollectionItem = ({ item, addItem }) => {
             &#8658;
           </ImagesSpan>
         </ImageShifter>
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            top: 0,
+            left: 0,
+          }}
+        >
+          <LazyLoadImage
+            src={imagesUrl[selectedPhoto]}
+            effect="blur"
+            style={{ height: "100%", width: "100%", objectFit: "cover" }}
+            height={"100%"}
+            width={"100%"}
+          />
+        </div>
       </ImageContainer>
       <CollectionFooterContainer>
         <span>{name}</span>
