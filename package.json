@@ -10,7 +10,7 @@
     "server": "nodemon server.js",
     "build": "cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "node server.js",
+    "start": "serve -s build",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "node": "^14.0.0",
     "node-schedule": "^2.1.0",
     "sass": "^1.49.9",
+    "serve": "^13.0.2",
     "socket.io": "^4.4.1",
     "stripe": "6.28.0"
   },
