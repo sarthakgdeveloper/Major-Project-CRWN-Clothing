@@ -2,7 +2,7 @@
   "name": "mutka-app-server",
   "version": "1.0.0",
   "engines": {
-    "node": "16.13.0",
+    "node": "14.19.1",
     "npm": "8.5.2"
   },
   "scripts": {
