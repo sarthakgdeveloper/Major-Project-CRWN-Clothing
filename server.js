@@ -15,7 +15,7 @@ const {
   placeHigherBid,
   checkAuctionBidEnded,
   endAuction,
-} = require("./config");
+} = require("./firebaseConfig");
 const {
   addUser,
   removeUser,
