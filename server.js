@@ -16,7 +16,12 @@ const {
   checkAuctionBidEnded,
   endAuction,
 } = require("./config");
-const { addUser, removeUser, getUser, clearAuctionRoom } = require("./users");
+const {
+  addUser,
+  removeUser,
+  getUser,
+  clearAuctionRoom,
+} = require("./models/users");
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
