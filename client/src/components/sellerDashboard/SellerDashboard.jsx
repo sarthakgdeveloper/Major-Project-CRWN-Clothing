@@ -9,8 +9,8 @@ import SellerEachProduct from "../sellerEachProduct/SellerEachProduct";
 function SellerDashboard({ currentUser }) {
   const [data, setData] = useState([]);
 
-  const gettingStoreData = async (storeIds) => {
-    await getStoreData(storeIds, setData);
+  const gettingStoreData = async (id) => {
+    await getStoreData(id, setData);
   };
 
   useEffect(() => {
@@ -18,8 +18,8 @@ function SellerDashboard({ currentUser }) {
   }, []);
 
   useEffect(() => {
-    if (currentUser?.storeIds) {
-      gettingStoreData(currentUser.storeIds);
+    if (currentUser?.id) {
+      gettingStoreData(currentUser.id);
     }
   }, [currentUser]);
 

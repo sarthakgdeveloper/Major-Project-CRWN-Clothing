@@ -28,6 +28,7 @@
     "redux-saga": "1.0.2",
     "redux-thunk": "2.3.0",
     "reselect": "4.0.0",
+    "socket.io-client": "^4.4.1",
     "styled-components": "4.2.0"
   },
   "resolutions": {

@@ -86,7 +86,11 @@ const HeaderPc = ({ currentUser, signOut, cartHidden }) => {
           )
         )}
         {currentUser?.user !== "Karigar"
-          ? null
+          ? currentUser?.user === "Gharak" && (
+              <OptionLink to="/auctions">
+                <span>{t("header_nav_auctions")}</span>
+              </OptionLink>
+            )
           : currentUser?.user === "Karigar" && (
               <OptionLink to="/orders">
                 <span>{t("header_nav_orders")}</span>

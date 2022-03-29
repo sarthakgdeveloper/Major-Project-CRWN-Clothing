@@ -13,6 +13,7 @@ import CheckOut from "./components/checkout/checkout";
 import "./App.css";
 import SellerOrders from "./components/sellersOrders/SellerOrders";
 import ProductAuction from "./components/productAuction/ProductAuction";
+import DisplayAuction from "./components/displayAuction/DisplayAuction";
 
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
@@ -34,7 +35,8 @@ const App = ({ checkUserSession, currentUser }) => {
         />
         <Route path="/:user/add-product" component={SellerAddProduct} />
         <Route path="/orders" component={SellerOrders} />
-        <Route path="/auction/:id" component={ProductAuction} />
+        <Route path="/auctions" exact component={DisplayAuction} />
+        <Route path="/auctions/:id" component={ProductAuction} />
       </Switch>
     </div>
   );

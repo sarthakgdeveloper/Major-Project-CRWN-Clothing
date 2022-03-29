@@ -1,9 +1,10 @@
 {
-  "header_name": "Matka",
+  "header_name": "Mutka",
   "header_nav_shop": "SHOP",
   "header_nav_signin": "Sign In",
   "header_nav_signout": "Sign Out",
   "header_nav_orders": "ORDERS",
+  "header_nav_auctions": "Auctions",
   "handicraft": "HANDICRAFT",
   "florist": "FLORIST",
   "sculpture": "SCULPTURE",

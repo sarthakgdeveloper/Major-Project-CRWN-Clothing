@@ -1,0 +1,99 @@
+.auctionPopup_container {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .auctionPopup {
+    height: 600px;
+    width: 600px;
+    border: 1px solid #000;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .close_icon {
+      width: 100%;
+      height: fit-content;
+      text-align: end;
+
+      i {
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+
+    .productDetail_container {
+      height: 150px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      div {
+        height: 100%;
+        width: 150px;
+        border-radius: 10px;
+        overflow: hidden;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+
+      p {
+        font-size: 22px;
+        font-weight: 900;
+      }
+    }
+
+    .productAuction_details {
+      height: fit-content;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+
+      div {
+        height: fit-content;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        input,
+        label {
+          font-size: 18px;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        input {
+          border: none;
+          border-bottom: 1px solid #000;
+          outline: none;
+          padding: 5px;
+        }
+      }
+    }
+
+    .submit_button {
+      width: 50%;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+  }
+}

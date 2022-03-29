@@ -1,0 +1,98 @@
+.displayAuctions_container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .displayAuctions {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .bid_started_container,
+    .bid_starting_container {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      p {
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      .bid_started,
+      .bid_starting {
+        height: fit-content;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .auction_stared,
+      .auction_starting {
+        width: 300px;
+        min-width: 300px;
+        max-width: 300px;
+        height: fit-content;
+        border: 1px solid #000;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+
+        .auctionProduct_image {
+          height: 250px;
+          width: 100%;
+
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+
+        button {
+          all: unset;
+          height: 30px;
+          width: 50%;
+          border: 1px solid #000;
+          border-radius: 10px;
+          cursor: pointer;
+          margin: 10px 0;
+
+          a {
+            color: #000;
+            text-decoration: none;
+            list-style: none;
+          }
+        }
+
+        .auctionStarting_dateTime {
+          height: fit-content;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+
+          div {
+            height: fit-content;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+  }
+}

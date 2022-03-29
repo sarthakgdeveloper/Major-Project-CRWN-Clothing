@@ -1,6 +1,7 @@
 .sellerEachProduct_container {
   height: fit-content;
   width: 100%;
+  max-width: 450px;
   border: 1px solid grey;
   border-radius: 10px;
   display: flex;
@@ -8,6 +9,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
+  padding-top: 0;
   position: relative;
 
   .productImages_shifters {
@@ -34,11 +36,21 @@
       user-select: none;
     }
   }
+
+  .auctionProduct_style {
+    color: rgb(25, 201, 25);
+    font-weight: 900;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 5px 0 0 15px;
+  }
 }
 
 .productImage_container {
   height: 200px;
-  width: 300px;
+  width: 80%;
+  max-width: 300px;
   border-radius: 10px;
   overflow: hidden;
 

@@ -14,6 +14,8 @@ const config = {
   measurementId: "G-1ZS40E2N6R",
 };
 
+firebase.initializeApp(config);
+
 const createSellerProfile = async (userAuth) => {
   const sellerPoint = firestore.doc(`sellersUID/${userAuth.email}`);
   const snapShot = await sellerPoint.get();
@@ -86,7 +88,6 @@ export const createUserProfileDocument = async (
       ...AdditionalData,
     };
     if (selectedUser === "Karigar") {
-      newData.storeIds = [];
       newData.category = [];
     }
     try {
@@ -101,7 +102,7 @@ export const createUserProfileDocument = async (
 export const getSellerOrders = async (id, getOrderData) => {
   const orderRef = firestore.collection("orders").where("uid", "==", id);
   const orderSnapshot = await orderRef.get();
-  const orderData = orderSnapshot.docs.map(async (doc) => {
+  orderSnapshot.docs.map(async (doc) => {
     const { id, quantity, userInfo } = doc.data();
     const productRef = firestore.doc(`products/${id}`);
     const snapshot = await productRef.get();
@@ -118,8 +119,6 @@ export const getSellerOrders = async (id, getOrderData) => {
     });
   });
 };
-
-firebase.initializeApp(config);
 
 export const addCollectionAndDocuments = async (
   collectionKey,
@@ -167,14 +166,13 @@ export const convertCollectionsSnapshotToMap = (collections) => {
   }, {});
 };
 
-export const getStoreData = async (storeIds, setData) => {
-  if (!storeIds) return;
-  storeIds.forEach(async (id) => {
-    const productRef = firestore.doc(`products/${id}`);
-    const storeData = await productRef.get();
-    const data = { ...storeData.data() };
+export const getStoreData = async (id, setData) => {
+  const productsRef = firestore.collection("products").where("uid", "==", id);
+  const pSnapshot = await productsRef.get();
+  pSnapshot.docs.map((product) => {
+    const data = product.data();
     setData((pData) => {
-      return [{ ...data }, ...pData];
+      return [{ ...data, id: product?.id }, ...pData];
     });
   });
 };
@@ -190,10 +188,7 @@ const uploadingProduct = async (
   isLoading
 ) => {
   try {
-    const sellerRef = firestore.doc(`sellers/${uid}`);
     const sellerEachProductRef = firestore.collection(`products`).doc();
-    const snapshot = await sellerRef.get();
-    const sellerData = { ...snapshot.data() };
     const newProduct = {
       imagesUrl,
       productName,
@@ -206,24 +201,6 @@ const uploadingProduct = async (
     await sellerEachProductRef.set({
       ...newProduct,
     });
-
-    if (snapshot.exists && sellerData?.storeIds.length > 0) {
-      await sellerRef.update({
-        ...sellerData,
-        storeIds: [...sellerData?.storeIds, sellerEachProductRef?.id],
-        category: sellerData.category.includes(category)
-          ? [...sellerData.category]
-          : [...sellerData?.category, category],
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      });
-    } else {
-      await sellerRef.set({
-        ...sellerData,
-        storeIds: [sellerEachProductRef.id],
-        category: [category],
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      });
-    }
     alert("uploaded");
     isUploaded(true);
     isLoading(false);
@@ -246,7 +223,7 @@ export const uploadNewProduct = async (
     const fileName = `${currentUser?.displayName?.replace(
       / /g,
       ""
-    )}_${productCategory}_${productName}_${file?.name}`;
+    )}_${productCategory}_${productName}_${file?.name}_${new Date().getTime()}`;
     const uploadTask = fireStorage.ref(`productsImages/${fileName}`).put(file);
     uploadTask.on(
       "state_changed",
@@ -311,26 +288,114 @@ export const sendUsersOrders = async ({
   });
 };
 
-export const sendNewAuctionBid = async (auctionId, user, bidAmount) => {
-  if (!auctionId) return;
-  const auctionRef = firestore.doc(`auctions/${auctionId}`);
-  const snapshot = await auctionRef.get();
-  const auctionData = snapshot.data();
-  if (
-    auctionData?.highest_bid < bidAmount &&
-    auctionData?.highest_bid_user !== user?.id
-  ) {
-    await auctionRef.update({
-      ...auctionData,
-      highest_bid: bidAmount,
-      highest_bid_user: user?.id,
-      highest_bid_user_name: user?.displayName,
+export const getAuctionProduct = async (id) => {
+  const auctionRef = firestore.doc(`auctions/${id}`);
+  const aSnapshop = await auctionRef.get();
+  const auctionData = aSnapshop.data();
+  const {
+    uid,
+    base_bid_value,
+    bid_ended,
+    bid_started,
+    highest_bid,
+    highest_bid_user,
+    highest_bid_user_name,
+  } = auctionData;
+  const productRef = firestore.doc(`products/${uid}`);
+  const pSnapshot = await productRef.get();
+  const productData = pSnapshot.data();
+  return {
+    productData,
+    base_bid_value,
+    bid_ended,
+    bid_started,
+    highest_bid,
+    highest_bid_user,
+    highest_bid_user_name,
+  };
+};
+
+export const createAuctionProduct = async ({ id, basePrice, date, time }) => {
+  const auctionRef = firestore.collection("auctions").doc();
+  const productRef = firestore.doc(`products/${id}`);
+  const pSnapshot = await productRef.get();
+  const productData = pSnapshot.data();
+
+  if (pSnapshot.exists) {
+    await auctionRef.set({
+      uid: id,
+      base_bid_value: basePrice,
+      bid_ended: false,
+      bid_started: false,
+      date,
+      time,
     });
 
-    return true;
+    await productRef.update({
+      ...productData,
+      isAuctioned: true,
+      auctionId: auctionRef?.id,
+    });
+
+    return auctionRef.id;
   }
 
   return false;
+};
+
+export const fGetAuctionsData = async (getAuctionData) => {
+  const auctionsRef = firestore
+    .collection("auctions")
+    .where("bid_ended", "==", false);
+  const snapshot = await auctionsRef.get();
+  const data = snapshot.docs.map((data) => ({ ...data.data(), id: data.id }));
+  data.forEach(async (auction) => {
+    const { uid } = auction;
+    const productRef = firestore.doc(`products/${uid}`);
+    const pSnapshot = await productRef.get();
+    const productData = pSnapshot.data();
+    getAuctionData((pData) => [...pData, { ...auction, productData }]);
+  });
+};
+
+const getImagePath = (urls) => {
+  return urls.map((url) => {
+    let imagePath = url.replace(
+      "https://firebasestorage.googleapis.com/v0/b/first-project--crown-clothing.appspot.com/o/",
+      ""
+    );
+    imagePath = imagePath.replace("%20", " ");
+
+    const indexOfEndPath = imagePath.indexOf("?");
+
+    imagePath = imagePath.substring(0, indexOfEndPath);
+
+    imagePath = imagePath.replace("%2F", "/");
+
+    return imagePath;
+  });
+};
+
+export const deleteSellerProduct = async (product) => {
+  const productRef = firestore.doc(`products/${product?.id}`);
+  const pSnapshot = await productRef.get();
+  const productImageName = getImagePath(product?.imagesUrl);
+  console.log(productImageName);
+  if (pSnapshot.exists) {
+    if (product?.isAuctioned) {
+      const auctionRef = firestore.doc(`auctions/${product?.auctionId}`);
+      const aSnapshop = await auctionRef.get();
+      if (aSnapshop.exists) {
+        await auctionRef.delete();
+      }
+    }
+    await productImageName.forEach(async (name) => {
+      const storageRef = fireStorage.ref();
+      const imageRef = storageRef.child(name);
+      await imageRef.delete();
+    });
+    await productRef.delete();
+  }
 };
 
 export const auth = firebase.auth();
