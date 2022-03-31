@@ -1,5 +1,6 @@
 const auctionRooms = {};
 const usersId = {};
+const socketIds = {};
 
 const addUser = ({ userId, room, userName, id }) => {
   if (!room || !userId) {
@@ -8,8 +9,9 @@ const addUser = ({ userId, room, userName, id }) => {
     };
   }
 
+  const user = { userId, userName };
+  socketIds[id] = user;
   if (!auctionRooms[room]) {
-    const user = { userId, userName };
     usersId[userId] = room;
     auctionRooms[room] = [{ ...user }];
     return {
@@ -24,15 +26,10 @@ const addUser = ({ userId, room, userName, id }) => {
 
   if (existing) {
     return {
-      message: "UserId Already in use, you might have joined back",
-      user: {
-        ...existing,
-        room,
-      },
+      error: "UserId Already in use, you might have joined back",
     };
   }
 
-  const user = { userId, userName };
   usersId[userId] = room;
   auctionRooms[room].push(user);
 
@@ -84,26 +81,27 @@ const getUser = (id) => {
 };
 
 const removeUser = (id) => {
-  let { index, room, error } = getIndexOfUser(id);
+  let user = socketIds[id];
+  if (user) {
+    const { index, room, error } = getIndexOfUser(user?.userId);
+    if (error) {
+      return { error };
+    }
 
-  if (error) {
-    return { error };
+    if (index === -1) {
+      return {
+        error: "Invalid data",
+      };
+    }
+
+    let disconnectedUser = auctionRooms[room][index];
+    auctionRooms[room].splice(index, 1);
+    delete usersId[user?.userId];
+    return { user: disconnectedUser };
   }
-
-  if (index === -1) {
-    return {
-      error: "Invalid data",
-    };
-  }
-
-  let user = auctionRooms[room][index];
-  user = {
-    ...user,
-    room,
+  return {
+    error: "invalid user",
   };
-  auctionRooms[room].splice(index, 1);
-  delete usersId[id];
-  return { user };
 };
 
 const clearAuctionRoom = (room) => {

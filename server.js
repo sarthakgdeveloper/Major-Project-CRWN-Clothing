@@ -3,7 +3,7 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:3000",
   },
 });
 const cors = require("cors");
@@ -75,7 +75,7 @@ app.post("/payment", (req, res) => {
 
 const auctionCounter = {};
 
-io.on("connection", async (socket) => {
+io.of("/auction").on("connection", async (socket) => {
   socket.on("join", async ({ userId, auctionRoom: room }, callBack) => {
     const { user: userDetails, error: errorMessage } = await getUserDetails(
       userId
@@ -88,6 +88,7 @@ io.on("connection", async (socket) => {
       userId,
       room,
       userName: userDetails?.displayName,
+      id: socket.id,
     });
 
     if (error) return callBack(error);
@@ -149,8 +150,8 @@ io.on("connection", async (socket) => {
     return callBack();
   });
 
-  socket.on("disconnectingUser", ({ userId }) => {
-    let { error } = removeUser(userId);
+  socket.on("disconnect", () => {
+    let { error } = removeUser(socket.id);
     if (error) return io.emit("error", error);
   });
 });

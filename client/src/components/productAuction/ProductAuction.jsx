@@ -24,7 +24,12 @@ function ProductAuction({ match, currentUser }) {
   const [loading, isLoading] = useState(true);
   const [bidEnded, isBidEnded] = useState(false);
 
-  const socket = io.connect("http://localhost:5000");
+  const endPoint =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5000/auction"
+      : `${window.location.origin}/auction`;
+
+  const socket = io.connect(endPoint);
 
   const getProductData = async () => {
     const data = await getAuctionProduct(match.params.id);
@@ -63,15 +68,12 @@ function ProductAuction({ match, currentUser }) {
           return console.log("successfully joined the room");
         }
       );
+
+    return () => socket.off();
   }, [currentUser?.id, productData]);
 
   useEffect(() => {
     getProductData();
-    window.addEventListener("beforeunload", (e) => {
-      e.preventDefault();
-      alert("hello");
-      return "jello";
-    });
   }, []);
 
   socket.on("auctionBid", ({ newBid, userId, userName }) => {
@@ -90,7 +92,6 @@ function ProductAuction({ match, currentUser }) {
   socket.on("auctionEnded", () => {
     console.log("ended");
     isBidEnded(true);
-    window.location.reload();
   });
 
   const handlebiddingInput = (e) => {
